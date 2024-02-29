@@ -53,3 +53,13 @@ public class Car {
     }
 }
 ```
+### Java Modifiers
+
+public: Most accessible. Can be accessed from anywhere.
+
+protected: Accessible within package and by subclasses.
+
+default (no modifier): Accessible only within the same package.
+
+private: Least accessible. Accessible only within the same class.
+
