@@ -1,47 +1,78 @@
-### Java Encapsulation
+### Java Packages & API
+A package in Java is used to group related classes. Think of it as a folder in a file directory. We use packages to avoid name conflicts, and to write a better maintainable code. Packages are divided into two categories:
 
-Encapsulation
-The meaning of Encapsulation, is to make sure that "sensitive" data is hidden from users. To achieve this, you must:
+Built-in Packages (packages from the Java API)
+User-defined Packages (create your own packages)
 
-declare class variables/attributes as private
-provide public get and set methods to access and update the value of a private variable
-Get and Set
-You learned from the previous chapter that private variables can only be accessed within the same class (an outside class has no access to it). However, it is possible to access them if we provide public get and set methods.
+Built-in Packages
 
-The get method returns the variable value, and the set method sets the value.
+The Java API is a library of prewritten classes, that are free to use, included in the Java Development Environment.
 
-Syntax for both is that they start with either get or set, followed by the name of the variable, with the first letter in upper case:
-
-Person class:
+The library contains components for managing input, database programming, and much much more. The complete list can be found at Oracles website: https://docs.oracle.com/javase/8/docs/api/.
 ```java
-public class Person {
-    private String name; // private = restricted access
+// import built-in scanner package 
+import java.util.Scanner;
 
-    // Getter
-    public String getName() {
-        return name;
-    }
+class MyClass {
+    public static void main(String[] args) {
+        Scanner myObj = new Scanner(System.in);
+        System.out.println("Enter username");
 
-    // Setter
-    public void setName(String newName) {
-        this.name = newName;
+        String userName = myObj.nextLine();
+        System.out.println("Username is: " + userName);
     }
 }
 ```
-Main Class:
+User-defined Packages (create your own packages)
+
+Step 1: Create Package Directory Structure:
+Step 2: Inside the math directory, create a Java file named Calculator.java.
+
 ```java
+package math;
+
+public class Calculator {
+    public int add(int num1, int num2){
+        return num1 + num2;
+    }
+    public int subtract(int num1, int num2){
+        return num1 - num2;
+    }
+    public int multiply(int num1, int num2){
+        return num1 * num2;
+    }
+    public int divide(int a, int b){
+        if (b != 0) {
+            return a / b;
+        } else {
+            System.out.println("Error: Division by zero!");
+            return 0; // Return 0 for simplicity in this example
+        }
+    }
+}
+```
+Step 3: Now you can use the Calculator class from the math package in your main class or any other class by importing it.
+
+```java
+// File: Main.java
+import math.Calculator;
+
 public class Main {
-  public static void main(String[] args) {
-    Person myObj = new Person();
-    myObj.name = "John";  // error
-    System.out.println(myObj.name); // error 
-  }
+    public static void main(String[] args) {
+        // Create an instance of Calculator
+        Calculator calculator = new Calculator();
+
+        // Perform arithmetic operations
+        int resultAdd = calculator.add(10, 5);
+        int resultSubtract = calculator.subtract(10, 5);
+        int resultMultiply = calculator.multiply(10, 5);
+        int resultDivide = calculator.divide(10, 5);
+
+        // Print results
+        System.out.println("Addition: " + resultAdd);
+        System.out.println("Subtraction: " + resultSubtract);
+        System.out.println("Multiplication: " + resultMultiply);
+        System.out.println("Division: " + resultDivide);
+    }
 }
 ```
-### Why Encapsulation?
-Better control of class attributes and methods
-
-Class attributes can be made read-only (if you only use the get method), or write-only (if you only use the set method)
-
-Flexible: the programmer can change one part of the code without affecting other parts
-Increased security of data
