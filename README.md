@@ -1,65 +1,47 @@
-### Java Constructors
+### Java Encapsulation
 
-A Java constructor is a special type of method in a class that is used to initialize objects. It's called automatically when an object of the class is created. The main purpose of a constructor is to initialize the newly created object.
+Encapsulation
+The meaning of Encapsulation, is to make sure that "sensitive" data is hidden from users. To achieve this, you must:
 
-Here's what you should know about Java constructors:
+declare class variables/attributes as private
+provide public get and set methods to access and update the value of a private variable
+Get and Set
+You learned from the previous chapter that private variables can only be accessed within the same class (an outside class has no access to it). However, it is possible to access them if we provide public get and set methods.
 
-1. Name: A constructor must have the same name as the class.
-2. No return type: Constructors don't have a return type, not even void.
-3. Initialization: Constructors are primarily used to initialize the instance variables of the object.
-4. Multiple constructors: You can have multiple constructors in a class with different parameters. This is called constructor overloading.
-5. Default constructor: If you don't provide any constructor in your class, Java provides a default constructor which initializes member variables to their default values.
-6. Invocation: Constructors are invoked using the new keyword when an object is created.
+The get method returns the variable value, and the set method sets the value.
 
+Syntax for both is that they start with either get or set, followed by the name of the variable, with the first letter in upper case:
+
+Person class:
 ```java
-public class Car {
-    // Member variables
-    String make;
-    String model;
-    int year;
+public class Person {
+    private String name; // private = restricted access
 
-    // Constructor without parameters (default constructor)
-    public Car() {
-        make = "Unknown";
-        model = "Unknown";
-        year = 0;
+    // Getter
+    public String getName() {
+        return name;
     }
 
-    // Constructor with parameters
-    public Car(String make, String model, int year) {
-        this.make = make;
-        this.model = model;
-        this.year = year;
-    }
-
-    // Method to display car details
-    public void displayDetails() {
-        System.out.println("Make: " + make);
-        System.out.println("Model: " + model);
-        System.out.println("Year: " + year);
-    }
-
-    public static void main(String[] args) {
-        // Creating objects using constructors
-        Car car1 = new Car(); // Using default constructor
-        Car car2 = new Car("Toyota", "Corolla", 2022); // Using parameterized constructor
-
-        // Displaying car details
-        System.out.println("Car 1 Details:");
-        car1.displayDetails();
-
-        System.out.println("\nCar 2 Details:");
-        car2.displayDetails();
+    // Setter
+    public void setName(String newName) {
+        this.name = newName;
     }
 }
 ```
-### Java Modifiers
+Main Class:
+```java
+public class Main {
+  public static void main(String[] args) {
+    Person myObj = new Person();
+    myObj.name = "John";  // error
+    System.out.println(myObj.name); // error 
+  }
+}
+```
+### Why Encapsulation?
+Better control of class attributes and methods
 
-public: Most accessible. Can be accessed from anywhere.
+Class attributes can be made read-only (if you only use the get method), or write-only (if you only use the set method)
 
-protected: Accessible within package and by subclasses.
-
-default (no modifier): Accessible only within the same package.
-
-private: Least accessible. Accessible only within the same class.
-
+Flexible: the programmer can change one part of the code without affecting other parts
+Increased security of data
