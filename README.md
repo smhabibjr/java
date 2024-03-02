@@ -1,78 +1,72 @@
-### Java Packages & API
-A package in Java is used to group related classes. Think of it as a folder in a file directory. We use packages to avoid name conflicts, and to write a better maintainable code. Packages are divided into two categories:
+### Java Inheritance (Subclass and Superclass)
+In Java, it is possible to inherit attributes and methods from one class to another. We group the "inheritance concept" into two categories:
 
-Built-in Packages (packages from the Java API)
-User-defined Packages (create your own packages)
+subclass (child) - the class that inherits from another class
+superclass (parent) - the class being inherited from
 
-Built-in Packages
+To inherit from a class, use the extends keyword.
 
-The Java API is a library of prewritten classes, that are free to use, included in the Java Development Environment.
+Superclass:
 
-The library contains components for managing input, database programming, and much much more. The complete list can be found at Oracles website: https://docs.oracle.com/javase/8/docs/api/.
+Let's create a superclass named Vehicle with basic attributes and behavior.
 ```java
-// import built-in scanner package 
-import java.util.Scanner;
+// Vehicle.java
+public class Vehicle {
+    // Fields
+    protected String brand;
+    protected String color;
 
-class MyClass {
-    public static void main(String[] args) {
-        Scanner myObj = new Scanner(System.in);
-        System.out.println("Enter username");
+    // Constructor
+    public Vehicle(String brand, String color) {
+        this.brand = brand;
+        this.color = color;
+    }
 
-        String userName = myObj.nextLine();
-        System.out.println("Username is: " + userName);
+    // Method
+    public void displayInfo() {
+        System.out.println("Brand: " + brand);
+        System.out.println("Color: " + color);
     }
 }
 ```
-User-defined Packages (create your own packages)
+Subclass:
 
-Step 1: Create Package Directory Structure:
-Step 2: Inside the math directory, create a Java file named Calculator.java.
-
+Now, let's create a subclass named Car that extends the Vehicle class and adds specific attributes and behavior.
 ```java
-package math;
+// Car.java
+public class Car extends Vehicle {
+    // Additional fields
+    private int numWheels;
 
-public class Calculator {
-    public int add(int num1, int num2){
-        return num1 + num2;
+    // Constructor
+    public Car(String brand, String color, int numWheels) {
+        super(brand, color); // Call superclass constructor
+        this.numWheels = numWheels;
     }
-    public int subtract(int num1, int num2){
-        return num1 - num2;
-    }
-    public int multiply(int num1, int num2){
-        return num1 * num2;
-    }
-    public int divide(int a, int b){
-        if (b != 0) {
-            return a / b;
-        } else {
-            System.out.println("Error: Division by zero!");
-            return 0; // Return 0 for simplicity in this example
-        }
+
+    // Additional method
+    public void displayNumWheels() {
+        System.out.println("Number of Wheels: " + numWheels);
     }
 }
 ```
-Step 3: Now you can use the Calculator class from the math package in your main class or any other class by importing it.
+Using Inheritance:
 
+Now, let's use the Vehicle and Car classes in a main class to demonstrate inheritance.
 ```java
-// File: Main.java
-import math.Calculator;
-
+// Main.java
 public class Main {
     public static void main(String[] args) {
-        // Create an instance of Calculator
-        Calculator calculator = new Calculator();
+        // Creating a Vehicle object
+        Vehicle vehicle = new Vehicle("Toyota", "Red");
+        System.out.println("Vehicle Information:");
+        vehicle.displayInfo();
 
-        // Perform arithmetic operations
-        int resultAdd = calculator.add(10, 5);
-        int resultSubtract = calculator.subtract(10, 5);
-        int resultMultiply = calculator.multiply(10, 5);
-        int resultDivide = calculator.divide(10, 5);
-
-        // Print results
-        System.out.println("Addition: " + resultAdd);
-        System.out.println("Subtraction: " + resultSubtract);
-        System.out.println("Multiplication: " + resultMultiply);
-        System.out.println("Division: " + resultDivide);
+        // Creating a Car object
+        Car car = new Car("BMW", "Blue", 4);
+        System.out.println("\nCar Information:");
+        car.displayInfo(); // Inherited method from Vehicle class
+        car.displayNumWheels(); // Method specific to Car class
     }
 }
 ```
