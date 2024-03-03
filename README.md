@@ -1,72 +1,40 @@
-### Java Inheritance (Subclass and Superclass)
-In Java, it is possible to inherit attributes and methods from one class to another. We group the "inheritance concept" into two categories:
+### Java Polymorphism
 
-subclass (child) - the class that inherits from another class
-superclass (parent) - the class being inherited from
+Polymorphism means "many forms", and it occurs when we have many classes that are related to each other by inheritance.
 
-To inherit from a class, use the extends keyword.
+Like we specified in the previous chapter; Inheritance lets us inherit attributes and methods from another class. Polymorphism uses those methods to perform different tasks. This allows us to perform a single action in different ways.
 
-Superclass:
-
-Let's create a superclass named Vehicle with basic attributes and behavior.
-```java
-// Vehicle.java
-public class Vehicle {
-    // Fields
-    protected String brand;
-    protected String color;
-
-    // Constructor
-    public Vehicle(String brand, String color) {
-        this.brand = brand;
-        this.color = color;
-    }
-
-    // Method
-    public void displayInfo() {
-        System.out.println("Brand: " + brand);
-        System.out.println("Color: " + color);
-    }
-}
-```
-Subclass:
-
-Now, let's create a subclass named Car that extends the Vehicle class and adds specific attributes and behavior.
-```java
-// Car.java
-public class Car extends Vehicle {
-    // Additional fields
-    private int numWheels;
-
-    // Constructor
-    public Car(String brand, String color, int numWheels) {
-        super(brand, color); // Call superclass constructor
-        this.numWheels = numWheels;
-    }
-
-    // Additional method
-    public void displayNumWheels() {
-        System.out.println("Number of Wheels: " + numWheels);
-    }
-}
-```
-Using Inheritance:
-
-Now, let's use the Vehicle and Car classes in a main class to demonstrate inheritance.
+For example, think of a superclass called Animal that has a method called animalSound(). Subclasses of Animals could be Pigs, Cats, Dogs, Birds - And they also have their own implementation of an animal sound (the pig oinks, and the cat meows, etc.):
 ```java
 // Main.java
-public class Main {
-    public static void main(String[] args) {
-        // Creating a Vehicle object
-        Vehicle vehicle = new Vehicle("Toyota", "Red");
-        System.out.println("Vehicle Information:");
-        vehicle.displayInfo();
+class Animal {
+  public void animalSound() {
+    System.out.println("The animal makes a sound");
+  }
+}
 
-        // Creating a Car object
-        Car car = new Car("BMW", "Blue", 4);
-        System.out.println("\nCar Information:");
-        car.displayInfo(); // Inherited method from Vehicle class
-        car.displayNumWheels(); // Method specific to Car class
-    }
+class Pig extends Animal {
+  public void animalSound() {
+    System.out.println("The pig says: wee wee");
+  }
+}
+
+class Dog extends Animal {
+  public void animalSound() {
+    System.out.println("The dog says: bow wow");
+  }
+}
+
+// Now we can create Pig and Dog objects and call the animalSound() method on both of them:
+
+class Main {
+  public static void main(String[] args) {
+    Animal myAnimal = new Animal();  // Create a Animal object
+    Animal myPig = new Pig();  // Create a Pig object
+    Animal myDog = new Dog();  // Create a Dog object
+    myAnimal.animalSound();
+    myPig.animalSound();
+    myDog.animalSound();
+  }
 }
 ```

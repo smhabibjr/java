@@ -1,16 +1,35 @@
 package org.main;
 
-import org.garage.Car;
-import org.garage.Vehicle;
+
+import java.awt.*;
+
+class Animal {
+    public void animalSound(){
+        System.out.println("This is the default animal sound!");
+    }
+}
+
+class Pig extends Animal {
+    public void animalSound(){
+        System.out.println("this is pig sound!");
+    }
+}
+
+class Dog extends Animal{
+    public void animalSound(){
+        System.out.println("This is Dog sound!");
+    }
+}
 
 public class Main {
     public static void main(String[] args){
-        // create an instance for vehicle class
-        Vehicle vehicle = new Vehicle("BMW", "blue");
-        vehicle.displyVehicleInfo();
+        Animal animal = new Animal();
+        Pig pig = new Pig();
+        Dog dog = new Dog();
 
-        // Create an instance for car class
-        Car car = new Car("Audi", "Orange", 25);
-        car.displayCarInfo();
+
+        animal.animalSound();
+        pig.animalSound();
+        dog.animalSound();
     }
 }
