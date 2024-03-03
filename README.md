@@ -1,46 +1,56 @@
-### Java ArrayList & LinkedList
-The difference between a built-in array and an ArrayList in Java, is that the size of an array cannot be modified (if you want to add or remove elements to/from an array, you have to create a new one). While elements can be added and removed from an ArrayList whenever you want. The syntax is also slightly different:
+### Why do we use static keywords in Java?
+In Java, the static keyword is used to define a class-level variable or method that belongs to the class itself rather than to any specific instance of the class. This means that the variable or method is shared across all instances of the class and can be accessed directly through the class name without needing to create an object.
+
+Here's a simple example without a static variable.
 ```java
-import java.util.ArrayList;
+// File: Student.java
+public class Student {
+    int initialStudent = 0;
+
+    Student(){
+        initialStudent++;
+    }
+
+    int getInitialStudent(){
+        return initialStudent;
+    }
+}
+
+```
+See the output? The initialStudent value did not change. Because the initialStudent value is not static, that is why every time it's created a new value for it.
+
+```java
+package org.example;
 
 public class Main {
     public static void main(String[] args) {
-        ArrayList<String> cars = new ArrayList<String>();
-        cars.add("Volvo");
-        cars.add("BMW");
-        cars.add("Ford");
-        cars.add("Mazda");
-        System.out.println(cars);
+        Student s1 = new Student();
+        Student s2 = new Student();
+        Student s3 = new Student();
+
+        System.out.println(s1.getInitialStudent());
     }
 }
-```
-#### The ArrayList class has many useful methods. For example,
 
+// output 
+1 // But it would be 3 because we initialize the Student object 3 times.
+```
+Now change the variable type instance to static and run the program again, you will see the output 3
 ```java
-// Access an Item
-cars.get(0);
+// File: Student.java
+public class Student {
+    static int initialStudent = 0;
 
-//Change an Item
-cars.set(0, "Opel");
+    Student(){
+        initialStudent++;
+    }
 
-//Remove an Item
-cars.remove(0);
-
-//To remove all the elements in the ArrayList, use the clear() method:
-cars.clear();
-
-// ArrayList Size
-cars.size();
-
-// Loop Through an ArrayList
-for (int i = 0; i < cars.size(); i++) {
-    System.out.println(cars.get(i));
+    int getInitialStudent(){
+        return initialStudent;
+    }
 }
 
-// Sort an ArrayList
-import java.util.Collections;  // Import the Collections class
-Collections.sort(cars);  // Sort cars
-for (String i : cars) {
-    System.out.println(i);
-}
+// output 
+3
 ```
+In this example, you can see how the static keyword allows variables and methods to be shared across all instances of a class and accessed directly through the class name. This promotes code reusability and improves performance in certain scenarios where you don't need instance-specific behavior.
